@@ -17,4 +17,4 @@ Roadmap du projet, par ordre de dépendance. Statuts en frontmatter de chaque fi
 
 Note (2026-07-04) : nom passé de **Nova\*** à **Nora\***, puis officialisé : **NoraShip**
 (`noraship.com` acquis). Tokens/classes gardent le préfixe court `nora` ; package `@noraship/ui`.
-Le dossier du repo s'appelle encore `novaship/` sur le disque ; à renommer à l'occasion.
+Dossier local : renommage prévu `~/projects/novaship/storybook` → `~/projects/noraship/ui` (fait par Jean, hors session).
