@@ -26,6 +26,7 @@ Le propriétaire du projet est Jean Pasqualini (jpasqualini75@gmail.com). Langue
 
 ## Conventions
 
+- **Commits : en anglais, sans trailer `Co-Authored-By`** (règle de Jean, 2026-07-04).
 - Préfixe des tokens CSS : `--nora-*` (ex. `--nora-color-accent`, `--nora-space-4`).
 - Un composant = un dossier `src/components/<Name>/` contenant `<Name>.tsx`,
   `<Name>.stories.tsx`, et ses styles/tests éventuels.
