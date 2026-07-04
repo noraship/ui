@@ -1,0 +1,75 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { ColorGrid, TypeScale, SpaceScale, RadiusRow, ShadowRow } from "./TokenDemos";
+
+<Meta title="Design system/Tokens" />
+
+# Tokens
+
+L'identité « **Hélios Prune** » vit entièrement dans des CSS variables préfixées `--nora-*`
+(`src/styles/nora.css`). Les composants ne référencent jamais une valeur brute — toujours un token.
+Le thème **sombre est le défaut** ; le clair adouci s'active via `data-theme="light"` sur `<html>`
+(utilise le toggle « Thème » de la toolbar pour voir cette page dans les deux mondes).
+
+> Pour changer d'accent plus tard : `node scripts/derive-accent.mjs "#xxxxxx"` imprime les
+> valeurs AA des deux thèmes à reporter dans `nora.css`.
+
+## Surfaces & texte
+
+<ColorGrid
+  tokens={[
+    { name: "Fond", cssVar: "--nora-bg" },
+    { name: "Surface", cssVar: "--nora-surface" },
+    { name: "Champ", cssVar: "--nora-field" },
+    { name: "Texte", cssVar: "--nora-ink" },
+    { name: "Texte atténué", cssVar: "--nora-muted" },
+    { name: "Bordure", cssVar: "--nora-line" },
+    { name: "Bordure forte", cssVar: "--nora-line-strong" },
+  ]}
+/>
+
+## Accent prune
+
+<ColorGrid
+  tokens={[
+    { name: "Accent (boutons)", cssVar: "--nora-accent" },
+    { name: "Accent hover", cssVar: "--nora-accent-hover" },
+    { name: "Texte accent", cssVar: "--nora-accent-text" },
+    { name: "Accent doux", cssVar: "--nora-accent-soft" },
+  ]}
+/>
+
+## Couleurs sémantiques
+
+La prune a été choisie précisément parce qu'elle n'entre en collision avec aucune de ces
+quatre familles (voir tasks/001).
+
+<ColorGrid
+  tokens={[
+    { name: "Succès", cssVar: "--nora-success-text" },
+    { name: "Alerte", cssVar: "--nora-warning-text" },
+    { name: "Erreur", cssVar: "--nora-danger-text" },
+    { name: "Info", cssVar: "--nora-info-text" },
+    { name: "Danger plein", cssVar: "--nora-danger" },
+  ]}
+/>
+
+## Typographie
+
+Display : **Source Serif 4** (la voix éditoriale d'Hélios) · Corps : **Public Sans** ·
+Mono : **JetBrains Mono**.
+
+<TypeScale />
+
+## Espacement
+
+Grille de 4 px, alignée sur l'échelle Tailwind.
+
+<SpaceScale />
+
+## Rayons
+
+<RadiusRow />
+
+## Élévation
+
+<ShadowRow />

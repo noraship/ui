@@ -1,0 +1,34 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Marque/Typographie" />
+
+# Typographie — la voix visuelle
+
+Trois familles, trois rôles, aucune exception :
+
+- **Source Serif 4** (`--nora-font-display`) — les titres uniquement. C'est la voix éditoriale
+  de NoraShip, celle qui la distingue d'un SaaS générique.
+- **Public Sans** (`--nora-font-body`) — tout le reste : texte courant, labels, boutons.
+  Neutre, très lisible, sans personnalité envahissante.
+- **JetBrains Mono** (`--nora-font-mono`) — code, identifiants, données tabulaires.
+
+## Règles de composition
+
+1. **Le serif est réservé aux titres** (`Heading`). Un paragraphe en serif = une erreur.
+2. **65 caractères maximum** pour le texte courant (`max-w-[65ch]` — déjà dans `Text`).
+3. **Les titres se balancent** (`text-wrap: balance`) et restent serrés (`leading-tight`).
+4. **La hiérarchie passe par la graisse et la taille**, jamais par la couleur ou les capitales.
+   Une exception : les micro-labels (colonnes de table, sections de sidebar) en
+   capitales espacées, taille `xs`, gris atténué.
+5. **Chiffres tabulaires** (`tabular-nums`) dès que des nombres s'alignent verticalement.
+
+## L'échelle
+
+Voir **Design system → Tokens** pour l'échelle rendue en direct (`xs` → `display`).
+En pratique : `display`/`3xl`/`2xl` pour les pages, `xl`/`lg` pour les cartes et sections,
+`base`/`sm` pour le contenu, `xs` pour les métadonnées.
+
+## Ton typographique
+
+NoraShip écrit en **bas de casse** : phrases normales, majuscule initiale, pas de Title Case.
+Les boutons disent ce qu'ils font (« Lancer la mission »), pas leur catégorie (« Valider »).

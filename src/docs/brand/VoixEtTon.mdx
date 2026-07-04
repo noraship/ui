@@ -1,0 +1,41 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Marque/Voix & ton" />
+
+# Voix & ton
+
+NoraShip parle comme un équipier compétent : calme, précis, direct. Jamais comme un commercial,
+jamais comme un robot qui s'excuse.
+
+## Les principes
+
+1. **Voix active, verbe d'action.** Un contrôle dit exactement ce qu'il fait.
+   - ✅ « Lancer la mission » · « Supprimer définitivement »
+   - ❌ « Valider » · « Soumettre » · « OK »
+2. **Le même mot du début à la fin.** Le bouton « Publier » produit un toast « Publié » —
+   jamais « Envoyé » ou « Terminé ».
+3. **Les erreurs expliquent et orientent, sans s'excuser.**
+   - ✅ « Le build a échoué à l'étape des tests — voir les logs. »
+   - ❌ « Oups ! Une erreur est survenue 😢 » · « Erreur inconnue (code 500) »
+4. **Les écrans vides invitent à agir.**
+   - ✅ « Aucune mission pour l'instant. Créez la première. »
+   - ❌ « Aucune donnée à afficher. »
+5. **Spécifique plutôt que malin.** Pas de jeux de mots dans les moments fonctionnels ;
+   la métaphore spatiale (mission, lancement, orbite) est permise mais légère — un clin
+   d'œil, pas un déguisement.
+
+## Registre
+
+- **Tutoiement ou vouvoiement ?** Vouvoiement par défaut dans le produit ; à re-trancher
+  quand la cible exacte sera connue.
+- Phrases courtes. Une idée par phrase. Pas de points d'exclamation dans l'interface.
+- Les nombres restent en chiffres (« 3 déploiements », pas « trois »).
+
+## Micro-textes de référence
+
+| Contexte | Texte |
+|---|---|
+| Confirmation destructive | « Le projet et ses 14 déploiements seront supprimés. Cette action ne peut pas être annulée. » |
+| Toast de succès | « Déployé en production. » |
+| Champ requis vide | « Renseignez un nom de mission. » |
+| Chargement | « Déploiement en cours… » |

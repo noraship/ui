@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+/* Les fontes ne sont pas embarquees ici (ce fichier est distribue dans le package npm).
+   L'app consommatrice - comme le preview Storybook - importe elle-meme les packages
+   @fontsource-variable/source-serif-4, public-sans et jetbrains-mono. */
+
+/*
+ * Nora* design tokens — identité « Hélios Prune » (tasks/001).
+ * Sombre par défaut ; clair adouci via [data-theme="light"]. Jamais de blanc ni de noir purs.
+ * Les valeurs accent des deux thèmes sont dérivées de la prune #6E3B5C par
+ * scripts/derive-accent.mjs (AA garanti) — même algorithme que l'atelier du moodboard.
+ */
+:root {
+  /* Surfaces & texte — thème sombre (défaut) */
+  --nora-bg: #191f1d;
+  --nora-surface: #232a27;
+  --nora-ink: #e8ebe7;
+  --nora-muted: #9fa89f;
+  --nora-line: #2f3733;
+  --nora-line-strong: #46504b;
+  --nora-field: #141a18;
+
+  /* Accent prune */
+  --nora-accent: #985380;
+  --nora-accent-hover: #a96190;
+  --nora-on-accent: #ffffff;
+  --nora-accent-text: #b1709a;
+  --nora-accent-soft: rgba(110, 59, 92, 0.16);
+
+  /* Sémantiques (texte + fond doux) */
+  --nora-success-text: #7cc08c;
+  --nora-success-soft: rgba(124, 192, 140, 0.14);
+  --nora-warning-text: #d9a548;
+  --nora-warning-soft: rgba(217, 165, 72, 0.15);
+  --nora-danger-text: #e07a68;
+  --nora-danger-soft: rgba(224, 122, 104, 0.14);
+  --nora-info-text: #7fa9d9;
+  --nora-info-soft: rgba(127, 169, 217, 0.14);
+
+  /* Danger plein (boutons destructifs) */
+  --nora-danger: #c4513f;
+  --nora-danger-hover: #d05e4c;
+  --nora-on-danger: #ffffff;
+
+  /* Typographie */
+  --nora-font-display: "Source Serif 4 Variable", ui-serif, Georgia, serif;
+  --nora-font-body: "Public Sans Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --nora-font-mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --nora-text-xs: 0.75rem;
+  --nora-text-sm: 0.875rem;
+  --nora-text-base: 1rem;
+  --nora-text-lg: 1.125rem;
+  --nora-text-xl: 1.375rem;
+  --nora-text-2xl: 1.75rem;
+  --nora-text-3xl: 2.25rem;
+  --nora-text-display: 3rem;
+  --nora-leading-tight: 1.15;
+  --nora-leading-normal: 1.6;
+
+  /* Espacement (grille 4px — alignée sur l'échelle Tailwind) */
+  --nora-space-1: 0.25rem;
+  --nora-space-2: 0.5rem;
+  --nora-space-3: 0.75rem;
+  --nora-space-4: 1rem;
+  --nora-space-5: 1.5rem;
+  --nora-space-6: 2rem;
+  --nora-space-7: 3rem;
+  --nora-space-8: 4rem;
+
+  /* Rayons */
+  --nora-radius-sm: 4px;
+  --nora-radius-ctl: 8px;
+  --nora-radius-card: 12px;
+  --nora-radius-full: 999px;
+
+  /* Élévation */
+  --nora-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --nora-shadow-2: 0 6px 24px rgba(0, 0, 0, 0.4);
+
+  /* Motion */
+  --nora-duration-fast: 120ms;
+  --nora-duration-base: 200ms;
+  --nora-duration-slow: 320ms;
+  --nora-ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --nora-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root[data-theme="light"] {
+  /* Clair adouci — jamais de blanc pur */
+  --nora-bg: #eae8e2;
+  --nora-surface: #f3f2ed;
+  --nora-ink: #1e201c;
+  --nora-muted: #565a51;
+  --nora-line: #d5d3ca;
+  --nora-line-strong: #b6b4a9;
+  --nora-field: #f3f2ed;
+
+  --nora-accent: #6e3b5c;
+  --nora-accent-hover: #82466d;
+  --nora-on-accent: #ffffff;
+  --nora-accent-text: #6e3b5c;
+  --nora-accent-soft: rgba(110, 59, 92, 0.12);
+
+  --nora-success-text: #256b3b;
+  --nora-success-soft: rgba(37, 107, 59, 0.12);
+  --nora-warning-text: #8a5a00;
+  --nora-warning-soft: rgba(138, 90, 0, 0.12);
+  --nora-danger-text: #b03a2e;
+  --nora-danger-soft: rgba(176, 58, 46, 0.11);
+  --nora-info-text: #2e5e8c;
+  --nora-info-soft: rgba(46, 94, 140, 0.11);
+
+  --nora-danger: #b03a2e;
+  --nora-danger-hover: #9c3328;
+  --nora-on-danger: #ffffff;
+
+  --nora-shadow-1: 0 1px 2px rgba(30, 32, 28, 0.1);
+  --nora-shadow-2: 0 6px 24px rgba(30, 32, 28, 0.12);
+}
+
+/* Expose les tokens à Tailwind (utilitaires bg-nora-*, text-nora-*, border-nora-*…) */
+@theme inline {
+  --color-nora-bg: var(--nora-bg);
+  --color-nora-surface: var(--nora-surface);
+  --color-nora-ink: var(--nora-ink);
+  --color-nora-muted: var(--nora-muted);
+  --color-nora-line: var(--nora-line);
+  --color-nora-line-strong: var(--nora-line-strong);
+  --color-nora-field: var(--nora-field);
+  --color-nora-accent: var(--nora-accent);
+  --color-nora-accent-hover: var(--nora-accent-hover);
+  --color-nora-on-accent: var(--nora-on-accent);
+  --color-nora-accent-text: var(--nora-accent-text);
+  --color-nora-accent-soft: var(--nora-accent-soft);
+  --color-nora-success-text: var(--nora-success-text);
+  --color-nora-success-soft: var(--nora-success-soft);
+  --color-nora-warning-text: var(--nora-warning-text);
+  --color-nora-warning-soft: var(--nora-warning-soft);
+  --color-nora-danger-text: var(--nora-danger-text);
+  --color-nora-danger-soft: var(--nora-danger-soft);
+  --color-nora-info-text: var(--nora-info-text);
+  --color-nora-info-soft: var(--nora-info-soft);
+  --color-nora-danger: var(--nora-danger);
+  --color-nora-danger-hover: var(--nora-danger-hover);
+  --color-nora-on-danger: var(--nora-on-danger);
+  --font-nora-display: var(--nora-font-display);
+  --font-nora-body: var(--nora-font-body);
+  --font-nora-mono: var(--nora-font-mono);
+  --radius-nora-sm: var(--nora-radius-sm);
+  --radius-nora-ctl: var(--nora-radius-ctl);
+  --radius-nora-card: var(--nora-radius-card);
+  --radius-nora-full: var(--nora-radius-full);
+  --shadow-nora-1: var(--nora-shadow-1);
+  --shadow-nora-2: var(--nora-shadow-2);
+}
+
+body {
+  background: var(--nora-bg);
+  color: var(--nora-ink);
+  font-family: var(--nora-font-body);
+  line-height: var(--nora-leading-normal);
+}

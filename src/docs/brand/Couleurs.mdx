@@ -1,0 +1,48 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Marque/Couleurs" />
+
+# Couleurs — usage et significations
+
+Les valeurs exactes vivent dans **Design system → Tokens**. Cette page dit *quand* utiliser
+chaque couleur, pas seulement laquelle.
+
+## La prune : rare, donc précieuse
+
+La prune est l'accent unique de NoraShip. Sa force vient de sa rareté : elle marque **l'action
+principale et la sélection**, rien d'autre.
+
+**Do**
+- Un seul bouton primaire (prune) par écran ou par carte.
+- Liens, éléments sélectionnés (onglet actif, item de sidebar actif, chip choisie).
+- Fonds doux `--nora-accent-soft` pour marquer une appartenance discrète.
+
+**Don't**
+- Colorer des titres ou du texte courant en prune « pour décorer ».
+- Deux boutons primaires côte à côte — si tout est important, rien ne l'est.
+- Utiliser la prune pour un état système (succès, erreur…) : c'est le rôle des sémantiques.
+
+## Les sémantiques : des états, pas de la décoration
+
+| Famille | Rôle | Exemple |
+|---|---|---|
+| Succès (vert) | Une opération a abouti | « Déployé en production » |
+| Alerte (ambre) | Attention requise, non bloquant | « 2 tests instables » |
+| Erreur (rouge) | Échec ou action destructive | « Le build a échoué », bouton Supprimer |
+| Info (bleu) | Information neutre | « Une mise à jour est disponible » |
+
+Chaque famille a une version **texte** (badges, messages) et le rouge a une version **pleine**
+(`--nora-danger`) réservée aux boutons destructifs.
+
+## Les neutres font le travail
+
+90 % d'un écran NoraShip est fait de neutres : fond, surface, encre, gris atténué, bordures.
+La hiérarchie visuelle vient d'eux (valeurs de gris + graisse), pas de la couleur.
+Si un écran semble plat, la réponse est presque toujours dans les neutres et l'espacement —
+pas dans l'ajout de couleur.
+
+## Changer l'accent un jour ?
+
+C'est prévu : `node scripts/derive-accent.mjs "#xxxxxx"` recalcule les valeurs AA des deux
+thèmes pour n'importe quelle couleur — voir `tasks/001` pour les finalistes déjà étudiés
+(lie-de-vin, encre violette).
