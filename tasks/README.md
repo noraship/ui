@@ -10,7 +10,7 @@ Roadmap du projet, par ordre de dépendance. Statuts en frontmatter de chaque fi
 | 004 | [Composants fondamentaux](004-composants-fondamentaux.md) | done | 003 |
 | 005 | [Composants avancés](005-composants-avances.md) | done | 004 |
 | 006 | [Pages brand](006-pages-brand.md) | done | 003 |
-| 007 | [Packaging & publication](007-packaging-publication.md) | in-progress (build OK ; publication en attente de décisions) | 004 |
+| 007 | [Packaging & publication](007-packaging-publication.md) | done (npm différé) | 004 |
 
 ⚠️ Tenir ce tableau synchronisé avec les frontmatters quand un statut change.
 
