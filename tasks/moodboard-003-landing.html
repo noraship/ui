@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  ::selection{background:rgba(152,83,128,.4);}
+  @keyframes noraBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  a{text-decoration:none;color:inherit;}
+</style>
+</helmet>
+
+<div style="--bg:#191f1d;--surface:#232a27;--surface2:#1f2522;--ink:#e8ebe7;--muted:#9fa89f;--line:#2f3733;--line-strong:#46504b;--field:#141a18;--acc:#985380;--acc-hover:#a96190;--acc-text:#b1709a;--acc-soft:rgba(110,59,92,.18);--success:#7cc08c;--warning:#d9a548;--danger:#e07a68;--info:#7fa9d9;--serif:'Source Serif 4',Georgia,serif;--body:'Public Sans',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;min-height:100vh;">
+
+  <!-- NAV -->
+  <header style="position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px;border-bottom:1px solid var(--line);background:rgba(25,31,29,.82);backdrop-filter:blur(10px);">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <div style="display:flex;align-items:baseline;gap:1px;">
+        <span style="font-family:var(--serif);font-weight:700;font-size:22px;letter-spacing:-.01em;">Nora</span>
+        <span style="font-family:var(--serif);font-weight:400;font-size:22px;color:var(--muted);letter-spacing:-.01em;">ship</span>
+      </div>
+      <span style="width:1px;height:20px;background:var(--line-strong);"></span>
+      <span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;">Atelier OS</span>
+    </div>
+    <nav style="display:flex;align-items:center;gap:28px;">
+      <a href="#parcours" style="font-size:14px;color:var(--muted);font-weight:500;">Le parcours</a>
+      <a href="#tarif" style="font-size:14px;color:var(--muted);font-weight:500;">Tarif</a>
+      <a href="#" style="font-size:14px;color:var(--muted);font-weight:500;">Se connecter</a>
+      <a href="#tarif" style="display:inline-flex;align-items:center;gap:8px;padding:9px 16px;background:var(--acc);color:#fff;border-radius:8px;font-size:14px;font-weight:600;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.35 1.11 2.92.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.71 1.03 1.62 1.03 2.74 0 3.92-2.34 4.79-4.57 5.04.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+        Continuer avec GitHub
+      </a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section style="max-width:1200px;margin:0 auto;padding:84px 40px 72px;display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center;">
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--muted);margin-bottom:26px;">
+        <span style="width:6px;height:6px;border-radius:999px;background:var(--acc-text);"></span>
+        Parcours guid&eacute; &middot; en fran&ccedil;ais
+      </div>
+      <h1 style="font-family:var(--serif);font-weight:600;font-size:58px;line-height:1.05;letter-spacing:-.02em;margin:0 0 22px;">&Eacute;cris ton propre syst&egrave;me d&rsquo;exploitation, <span style="color:var(--acc-text);font-style:italic;">ligne par ligne.</span></h1>
+      <p style="font-size:19px;line-height:1.6;color:var(--muted);max-width:520px;margin:0 0 34px;">Du premier octet qui s&rsquo;affiche jusqu&rsquo;au shell&nbsp;: tu &eacute;cris chaque ligne en Rust et en assembleur. La plateforme t&rsquo;enseigne la th&eacute;orie, v&eacute;rifie ta compr&eacute;hension par un QCM, et boote ton code dans QEMU &agrave; chaque &eacute;tape.</p>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <a href="#tarif" style="display:inline-flex;align-items:center;gap:9px;padding:14px 26px;background:var(--acc);color:#fff;border-radius:10px;font-size:16px;font-weight:600;box-shadow:0 10px 30px rgba(110,59,92,.35);">
+          Commencer &mdash; c&rsquo;est gratuit
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#parcours" style="display:inline-flex;align-items:center;gap:9px;padding:14px 22px;background:transparent;color:var(--ink);border:1px solid var(--line-strong);border-radius:10px;font-size:16px;font-weight:600;">Voir le parcours</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:22px;font-size:13px;color:var(--muted);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Gratuit pour les 8 modules de fondations &middot; aucune carte requise
+      </div>
+    </div>
+
+    <!-- HERO VISUAL : terminal QEMU -->
+    <div style="position:relative;">
+      <div style="position:absolute;inset:-30px -20px;background:radial-gradient(60% 60% at 70% 30%,rgba(152,83,128,.22),transparent 70%);filter:blur(8px);pointer-events:none;"></div>
+      <div style="position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line-strong);box-shadow:0 24px 60px rgba(0,0,0,.5);background:#12100f;">
+        <div style="display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid #251f1d;background:#181513;">
+          <span style="width:11px;height:11px;border-radius:999px;background:#c4513f;"></span>
+          <span style="width:11px;height:11px;border-radius:999px;background:#d9a548;"></span>
+          <span style="width:11px;height:11px;border-radius:999px;background:#7cc08c;"></span>
+          <span style="font-family:var(--mono);font-size:11px;color:#8a938b;margin-left:8px;">QEMU &mdash; boot.bin</span>
+          <span style="margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--success);">&#9679; actif</span>
+        </div>
+        <div style="padding:18px 18px 22px;font-family:var(--mono);font-size:13px;line-height:1.75;">
+          <div style="color:#cdd3cd;font-weight:700;">$ make run</div>
+          <div style="color:#7f8a83;">nasm -f bin boot.asm -o boot.bin</div>
+          <div style="color:#7f8a83;">qemu-system-x86_64 -drive format=raw,file=boot.bin</div>
+          <div style="height:10px;"></div>
+          <div style="color:#8fa6bf;">SeaBIOS (version 1.16.2-1)</div>
+          <div style="color:#8fa6bf;">Booting from Hard Disk...</div>
+          <div style="color:#8ee0a0;font-weight:700;font-size:15px;margin-top:2px;">Hello kernel</div>
+          <div style="color:#7cc08c;margin-top:2px;">&#10003; Boot r&eacute;ussi &mdash; le CPU boucle sur ton bootloader.<span style="display:inline-block;width:8px;height:15px;background:#7cc08c;vertical-align:text-bottom;margin-left:4px;animation:noraBlink 1s step-end infinite;"></span></div>
+        </div>
+      </div>
+      <!-- mini editor chip -->
+      <div style="position:absolute;left:-28px;bottom:-34px;width:250px;border-radius:11px;overflow:hidden;border:1px solid var(--line);box-shadow:0 16px 40px rgba(0,0,0,.5);background:var(--bg);">
+        <div style="display:flex;align-items:center;gap:8px;padding:7px 12px;border-bottom:1px solid var(--line);background:var(--surface2);">
+          <span style="width:18px;height:14px;border-radius:3px;background:var(--field);color:var(--acc-text);font-family:var(--body);font-size:7px;font-weight:700;display:flex;align-items:center;justify-content:center;">AS</span>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--muted);">boot.asm</span>
+        </div>
+        <pre style="margin:0;padding:12px;font-family:var(--mono);font-size:11px;line-height:1.7;"><span style="color:#c98bb3;">mov</span> ah<span style="color:#9fa89f;">,</span> <span style="color:#d9a548;">0x0E</span>
+<span style="color:#c98bb3;">int</span> <span style="color:#d9a548;">0x10</span>   <span style="color:#8a938b;">; affiche al</span>
+<span style="color:#c98bb3;">jmp</span> print</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section style="max-width:1200px;margin:0 auto;padding:40px 40px 20px;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+      <div style="padding:26px;border:1px solid var(--line);border-radius:14px;background:var(--surface);">
+        <div style="font-family:var(--mono);font-size:13px;color:var(--acc-text);margin-bottom:12px;">01</div>
+        <div style="font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:6px;">On te situe</div>
+        <p style="font-size:15px;color:var(--muted);margin:0;">Un test de positionnement all&egrave;ge ce que tu ma&icirc;trises et cible ce qui te manque.</p>
+      </div>
+      <div style="padding:26px;border:1px solid var(--line);border-radius:14px;background:var(--surface);">
+        <div style="font-family:var(--mono);font-size:13px;color:var(--acc-text);margin-bottom:12px;">02</div>
+        <div style="font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:6px;">Tu apprends &amp; tu valides</div>
+        <p style="font-size:15px;color:var(--muted);margin:0;">La th&eacute;orie d&rsquo;abord, vulgaris&eacute;e, puis un QCM corrig&eacute; pour ancrer chaque concept.</p>
+      </div>
+      <div style="padding:26px;border:1px solid var(--line);border-radius:14px;background:var(--surface);">
+        <div style="font-family:var(--mono);font-size:13px;color:var(--acc-text);margin-bottom:12px;">03</div>
+        <div style="font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:6px;">Tu codes &amp; tu bootes</div>
+        <p style="font-size:15px;color:var(--muted);margin:0;">&Eacute;diteur, arborescence, terminal QEMU&nbsp;: ton OS d&eacute;marre pour de vrai, &agrave; chaque &eacute;tape.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="parcours" style="max-width:1200px;margin:0 auto;padding:64px 40px;">
+    <div style="max-width:640px;margin-bottom:44px;">
+      <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc-text);font-weight:600;">Pourquoi NoraShip</span>
+      <h2 style="font-family:var(--serif);font-weight:600;font-size:38px;line-height:1.12;letter-spacing:-.01em;margin:12px 0 0;">Comprendre chaque octet, pas seulement le copier.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;">
+      <div style="padding:28px;border:1px solid var(--line);border-radius:14px;background:var(--surface);display:flex;gap:18px;">
+        <div style="width:42px;height:42px;flex:0 0 42px;border-radius:10px;background:var(--acc-soft);display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13ZM20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13Z" stroke="#b1709a" stroke-width="1.6"/></svg>
+        </div>
+        <div>
+          <h3 style="font-family:var(--serif);font-size:20px;font-weight:600;margin:2px 0 8px;">Jamais de magie</h3>
+          <p style="font-size:15px;color:var(--muted);margin:0;line-height:1.6;">R&egrave;gle d&rsquo;or&nbsp;: tu ne tapes jamais une ligne que tu ne comprends pas. Chaque &eacute;tape est pr&eacute;c&eacute;d&eacute;e de la th&eacute;orie n&eacute;cessaire, v&eacute;rifi&eacute;e par un QCM comment&eacute;.</p>
+        </div>
+      </div>
+      <div style="padding:28px;border:1px solid var(--line);border-radius:14px;background:var(--surface);display:flex;gap:18px;">
+        <div style="width:42px;height:42px;flex:0 0 42px;border-radius:10px;background:var(--acc-soft);display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="6" y="6" width="12" height="12" rx="2" stroke="#b1709a" stroke-width="1.6"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3" stroke="#b1709a" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <h3 style="font-family:var(--serif);font-size:20px;font-weight:600;margin:2px 0 8px;">Ton OS, pour de vrai</h3>
+          <p style="font-size:15px;color:var(--muted);margin:0;line-height:1.6;">Pas un exercice jouet&nbsp;: bootloader, interruptions, m&eacute;moire, multit&acirc;che, syscalls, syst&egrave;me de fichiers, shell. Ton OS boote dans QEMU &agrave; chaque &eacute;tape.</p>
+        </div>
+      </div>
+      <div style="padding:28px;border:1px solid var(--line);border-radius:14px;background:var(--surface);display:flex;gap:18px;">
+        <div style="width:42px;height:42px;flex:0 0 42px;border-radius:10px;background:var(--acc-soft);display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9a1.5 1.5 0 0 1-1.5 1.5H9l-4 4V5.5Z" stroke="#b1709a" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h3 style="font-family:var(--serif);font-size:20px;font-weight:600;margin:2px 0 8px;">Un tuteur IA avec toi</h3>
+          <p style="font-size:15px;color:var(--muted);margin:0;line-height:1.6;">Une erreur de compilation, un crash au boot, une question de th&eacute;orie&nbsp;? Le tuteur voit ta le&ccedil;on, ton code et tes erreurs &mdash; il te met sur la piste sans faire &agrave; ta place.</p>
+        </div>
+      </div>
+      <div style="padding:28px;border:1px solid var(--line);border-radius:14px;background:var(--surface);display:flex;gap:18px;">
+        <div style="width:42px;height:42px;flex:0 0 42px;border-radius:10px;background:var(--acc-soft);display:flex;align-items:center;justify-content:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#b1709a" stroke-width="1.6"/><circle cx="12" cy="12" r="3.4" stroke="#b1709a" stroke-width="1.6"/><circle cx="12" cy="12" r=".6" fill="#b1709a"/></svg>
+        </div>
+        <div>
+          <h3 style="font-family:var(--serif);font-size:20px;font-weight:600;margin:2px 0 8px;">Adapt&eacute; &agrave; ton niveau</h3>
+          <p style="font-size:15px;color:var(--muted);margin:0;line-height:1.6;">On consolide d&rsquo;abord les fondations &mdash; binaire, bitwise, assembleur, Rust bare-metal &mdash; avant d&rsquo;attaquer le syst&egrave;me. Ce que tu ma&icirc;trises d&eacute;j&agrave; est all&eacute;g&eacute;.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- curriculum peek -->
+    <div style="margin-top:40px;padding:26px 28px;border:1px solid var(--line);border-radius:14px;background:var(--surface2);">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:18px;flex-wrap:wrap;">
+        <div style="font-family:var(--serif);font-size:18px;font-weight:600;">10 chapitres, du reset au r&eacute;seau</div>
+        <div style="font-size:13px;color:var(--muted);">C01 &rarr; C10</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <span style="padding:8px 13px;border-radius:8px;background:var(--acc-soft);color:var(--acc-text);font-size:13px;font-weight:600;">C01 &middot; Premier boot</span>
+        <span style="padding:8px 13px;border-radius:8px;border:1px solid var(--line);color:var(--muted);font-size:13px;">C02 &middot; Interruptions</span>
+        <span style="padding:8px 13px;border-radius:8px;border:1px solid var(--line);color:var(--muted);font-size:13px;">C03 &middot; M&eacute;moire &amp; MMU</span>
+        <span style="padding:8px 13px;border-radius:8px;border:1px solid var(--line);color:var(--muted);font-size:13px;">C04 &middot; Multit&acirc;che</span>
+        <span style="padding:8px 13px;border-radius:8px;border:1px solid var(--line);color:var(--muted);font-size:13px;">C05 &middot; Syscalls</span>
+        <span style="padding:8px 13px;border-radius:8px;border:1px solid var(--line);color:var(--muted);font-size:13px;">C06 &middot; Fichiers</span>
+        <span style="padding:8px 13px;border-radius:8px;border:1px solid var(--line);color:var(--muted);font-size:13px;">C07 &middot; Shell</span>
+        <span style="padding:8px 13px;border-radius:8px;border:1px solid var(--line);color:var(--muted);font-size:13px;">C08 &middot; R&eacute;seau</span>
+        <span style="padding:8px 13px;border-radius:8px;border:1px solid var(--line);color:var(--muted);font-size:13px;">C09 &middot; Framebuffer</span>
+        <span style="padding:8px 13px;border-radius:8px;border:1px solid var(--line);color:var(--muted);font-size:13px;">C10 &middot; OS complet</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="tarif" style="max-width:1200px;margin:0 auto;padding:40px 40px 72px;">
+    <div style="text-align:center;max-width:560px;margin:0 auto 40px;">
+      <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc-text);font-weight:600;">Tarif</span>
+      <h2 style="font-family:var(--serif);font-weight:600;font-size:38px;line-height:1.12;letter-spacing:-.01em;margin:12px 0 8px;">Un prix simple, pas d&rsquo;abonnement.</h2>
+      <p style="font-size:16px;color:var(--muted);margin:0;">Commence gratuitement &mdash; tu d&eacute;cideras apr&egrave;s ton premier boot.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:840px;margin:0 auto;">
+      <!-- Free -->
+      <div style="padding:32px;border:1px solid var(--line);border-radius:16px;background:var(--surface);display:flex;flex-direction:column;">
+        <div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;">D&eacute;couverte</div>
+        <div style="font-family:var(--serif);font-size:40px;font-weight:700;margin:10px 0 20px;">Gratuit</div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;margin-bottom:26px;">
+          <div style="display:flex;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:0 0 18px;margin-top:2px;"><path d="M5 12l5 5L19 7" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Les 8 modules de fondations</div>
+          <div style="display:flex;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:0 0 18px;margin-top:2px;"><path d="M5 12l5 5L19 7" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>C01 &mdash; premier boot &amp; affichage</div>
+          <div style="display:flex;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:0 0 18px;margin-top:2px;"><path d="M5 12l5 5L19 7" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Ton OS affiche &laquo;&nbsp;Hello&nbsp;&raquo;</div>
+        </div>
+        <a href="#" style="margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border:1px solid var(--line-strong);border-radius:10px;font-size:15px;font-weight:600;color:var(--ink);">Commencer gratuitement</a>
+      </div>
+
+      <!-- Paid -->
+      <div style="position:relative;padding:32px;border:1.5px solid var(--acc);border-radius:16px;background:var(--surface);box-shadow:0 0 0 4px var(--acc-soft);display:flex;flex-direction:column;">
+        <span style="position:absolute;top:-12px;left:32px;padding:4px 12px;background:var(--acc);color:#fff;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em;">POPULAIRE</span>
+        <div style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--acc-text);font-weight:600;">Acc&egrave;s complet</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin:10px 0 20px;">
+          <span style="font-family:var(--serif);font-size:40px;font-weight:700;">9&nbsp;&euro;</span>
+          <span style="font-size:14px;color:var(--muted);">une fois &middot; acc&egrave;s &agrave; vie</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;margin-bottom:20px;">
+          <div style="display:flex;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:0 0 18px;margin-top:2px;"><path d="M5 12l5 5L19 7" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Tout D&eacute;couverte, plus&nbsp;:</div>
+          <div style="display:flex;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:0 0 18px;margin-top:2px;"><path d="M5 12l5 5L19 7" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>C02 &rarr; C10&nbsp;: interruptions, m&eacute;moire, multit&acirc;che, syscalls, disque, shell, r&eacute;seau, &eacute;cran</div>
+          <div style="display:flex;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:0 0 18px;margin-top:2px;"><path d="M5 12l5 5L19 7" stroke="var(--success)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Jusqu&rsquo;&agrave; l&rsquo;OS complet</div>
+        </div>
+        <div style="padding:14px 16px;background:var(--acc-soft);border-radius:10px;font-size:14px;margin-bottom:24px;">
+          <strong style="color:var(--acc-text);">Option tuteur IA</strong> &mdash; +10&nbsp;&euro; pour 12 mois d&rsquo;aide sur ton code et tes questions (300&nbsp;questions/mois).
+        </div>
+        <a href="#" style="margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 20px;background:var(--acc);color:#fff;border-radius:10px;font-size:15px;font-weight:600;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.35 1.11 2.92.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.05 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.71 1.03 1.62 1.03 2.74 0 3.92-2.34 4.79-4.57 5.04.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+          Continuer avec GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="border-top:1px solid var(--line);">
+    <div style="max-width:1200px;margin:0 auto;padding:34px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="display:flex;align-items:baseline;gap:1px;">
+          <span style="font-family:var(--serif);font-weight:700;font-size:18px;">Nora</span>
+          <span style="font-family:var(--serif);font-weight:400;font-size:18px;color:var(--muted);">ship</span>
+        </div>
+        <span style="font-size:13px;color:var(--muted);">&mdash; apprends en construisant.</span>
+      </div>
+      <div style="display:flex;gap:24px;font-size:13px;color:var(--muted);">
+        <a href="#parcours">Le parcours</a>
+        <a href="#tarif">Tarif</a>
+        <a href="#">GitHub</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+</body>
+</html>
