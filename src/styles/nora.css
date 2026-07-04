@@ -14,6 +14,7 @@
   /* Surfaces & texte — thème sombre (défaut) */
   --nora-bg: #191f1d;
   --nora-surface: #232a27;
+  --nora-surface-2: #1f2522;
   --nora-ink: #e8ebe7;
   --nora-muted: #9fa89f;
   --nora-line: #2f3733;
@@ -41,6 +42,21 @@
   --nora-danger: #c4513f;
   --nora-danger-hover: #d05e4c;
   --nora-on-danger: #ffffff;
+
+  /* Syntaxe code (blocs de code, éditeur) — AA sur --nora-field */
+  --nora-code-ink: #cdd3cd;
+  --nora-code-keyword: #c98bb3;
+  --nora-code-string: #7cc08c;
+  --nora-code-number: #d9a548;
+  --nora-code-directive: #7fa9d9;
+  --nora-code-comment: #8a938b;
+  --nora-code-punct: #9fa89f;
+
+  /* Terminal (console série QEMU) — volontairement sombre dans les deux thèmes */
+  --nora-term-bg: #12100f;
+  --nora-term-line: #251f1d;
+  --nora-term-ink: #cdd3cd;
+  --nora-term-muted: #8a938b;
 
   /* Typographie */
   --nora-font-display: "Source Serif 4 Variable", ui-serif, Georgia, serif;
@@ -90,6 +106,7 @@
   /* Clair adouci — jamais de blanc pur */
   --nora-bg: #eae8e2;
   --nora-surface: #f3f2ed;
+  --nora-surface-2: #efeee8;
   --nora-ink: #1e201c;
   --nora-muted: #565a51;
   --nora-line: #d5d3ca;
@@ -115,6 +132,17 @@
   --nora-danger-hover: #9c3328;
   --nora-on-danger: #ffffff;
 
+  /* Syntaxe code — AA vérifié sur --nora-field et --nora-bg clairs */
+  --nora-code-ink: #1e201c;
+  --nora-code-keyword: #8d4674;
+  --nora-code-string: #256b3b;
+  --nora-code-number: #8a5a00;
+  --nora-code-directive: #2e5e8c;
+  --nora-code-comment: #5f655d;
+  --nora-code-punct: #565a51;
+
+  /* Terminal : mêmes valeurs qu'en sombre (un terminal reste sombre) */
+
   --nora-shadow-1: 0 1px 2px rgba(30, 32, 28, 0.1);
   --nora-shadow-2: 0 6px 24px rgba(30, 32, 28, 0.12);
 }
@@ -123,6 +151,7 @@
 @theme inline {
   --color-nora-bg: var(--nora-bg);
   --color-nora-surface: var(--nora-surface);
+  --color-nora-surface-2: var(--nora-surface-2);
   --color-nora-ink: var(--nora-ink);
   --color-nora-muted: var(--nora-muted);
   --color-nora-line: var(--nora-line);
@@ -144,6 +173,17 @@
   --color-nora-danger: var(--nora-danger);
   --color-nora-danger-hover: var(--nora-danger-hover);
   --color-nora-on-danger: var(--nora-on-danger);
+  --color-nora-code-ink: var(--nora-code-ink);
+  --color-nora-code-keyword: var(--nora-code-keyword);
+  --color-nora-code-string: var(--nora-code-string);
+  --color-nora-code-number: var(--nora-code-number);
+  --color-nora-code-directive: var(--nora-code-directive);
+  --color-nora-code-comment: var(--nora-code-comment);
+  --color-nora-code-punct: var(--nora-code-punct);
+  --color-nora-term-bg: var(--nora-term-bg);
+  --color-nora-term-line: var(--nora-term-line);
+  --color-nora-term-ink: var(--nora-term-ink);
+  --color-nora-term-muted: var(--nora-term-muted);
   --font-nora-display: var(--nora-font-display);
   --font-nora-body: var(--nora-font-body);
   --font-nora-mono: var(--nora-font-mono);

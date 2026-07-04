@@ -71,3 +71,15 @@ export type { RadioCardsProps, RadioCardOption } from "./components/RadioCards/R
 
 export { Accordion } from "./components/Accordion/Accordion";
 export type { AccordionProps, AccordionItem } from "./components/Accordion/Accordion";
+
+export { Wordmark } from "./components/Wordmark/Wordmark";
+export type { WordmarkProps } from "./components/Wordmark/Wordmark";
+
+export { TopBar, TopBarNav, TopBarNavItem } from "./components/TopBar/TopBar";
+export type { TopBarProps, TopBarNavProps, TopBarNavItemProps } from "./components/TopBar/TopBar";
+
+export { StatChip } from "./components/StatChip/StatChip";
+export type { StatChipProps, StatChipVariant } from "./components/StatChip/StatChip";
+
+export { Checklist } from "./components/Checklist/Checklist";
+export type { ChecklistProps, ChecklistItem, ChecklistState } from "./components/Checklist/Checklist";
