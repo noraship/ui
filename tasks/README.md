@@ -11,6 +11,7 @@ Roadmap du projet, par ordre de dépendance. Statuts en frontmatter de chaque fi
 | 005 | [Composants avancés](005-composants-avances.md) | done | 004 |
 | 006 | [Pages brand](006-pages-brand.md) | done | 003 |
 | 007 | [Packaging & publication](007-packaging-publication.md) | done (npm différé) | 004 |
+| 008 | [Composants build-os-teacher](008-composants-build-os-teacher.md) | done | 004, 005 |
 
 ⚠️ Tenir ce tableau synchronisé avec les frontmatters quand un statut change.
 

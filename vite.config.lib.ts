@@ -13,7 +13,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // Rien de React ni de Radix n'est embarqué : dépendances du consommateur.
-      external: [/^react($|\/)/, /^react-dom($|\/)/, /^radix-ui($|\/)/, /^@fontsource/],
+      external: [/^react($|\/)/, /^react-dom($|\/)/, /^radix-ui($|\/)/, /^@fontsource/, /^react-markdown/, /^remark-gfm/],
     },
     sourcemap: true,
   },
