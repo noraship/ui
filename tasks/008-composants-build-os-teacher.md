@@ -36,3 +36,9 @@ landing + pricing, dashboard de modules, pages leçon avec tutoriel markdown + Q
   du build lib (index.js : 30,7 kB). Vérifié : tsc OK, build lib OK, build Storybook OK,
   46 stories. Prochaine étape côté build-os-teacher : consommer @noraship/ui
   (`file:../storybook` en attendant npm) et servir le markdown brut depuis l'API Go.
+- 2026-07-04 : premier branchement réel (build-os-teacher). Découverte : les leçons
+  embarquent des `<iframe>` (pages interactives) que react-markdown ignore par défaut →
+  ajout d'une prop opt-in **`allowHtml`** à Prose (rehype-raw, réservé au contenu de
+  confiance) + rendu stylé de `iframe` + story dédiée. Feedback à traiter plus tard :
+  Breadcrumb/PrevNext rendent des `<a href>` bruts — plein rechargement dans une SPA
+  react-router ; prévoir un `asChild` ou un composant de lien injectable.
