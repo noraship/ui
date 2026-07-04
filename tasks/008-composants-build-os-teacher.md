@@ -44,3 +44,8 @@ landing + pricing, dashboard de modules, pages leçon avec tutoriel markdown + Q
   rendus par un composant dédié hors markdown. Feedback à traiter plus tard :
   Breadcrumb/PrevNext rendent des `<a href>` bruts — plein rechargement dans une SPA
   react-router ; prévoir un `asChild` ou un composant de lien injectable.
+- 2026-07-05 : feedback lien traité — `Button` accepte `asChild` (Radix
+  Slot) pour rendre un `<a>`/`<Link>` stylé, et `Breadcrumb`/`PrevNext`
+  acceptent `linkComponent` (adaptateur react-router injectable, `<a>` par
+  défaut). Adopté côté build-os-teacher (breadcrumb + prev/next de la
+  page leçon, CTA quiz).

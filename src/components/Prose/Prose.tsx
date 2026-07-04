@@ -1,15 +1,31 @@
-import { useRef, useState } from "react";
-import type { ComponentProps } from "react";
+import { isValidElement, useRef, useState } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { highlightCode, isCodeLang } from "./highlight";
 
 export interface ProseProps {
   /** Markdown brut (GFM : tableaux, listes de tâches, etc.) */
   markdown: string;
 }
 
-/** Bloc de code avec bouton copier — utilisé par Prose pour chaque ``` du markdown. */
-function CodeBlock(props: ComponentProps<"pre">) {
+/* Fouille le nœud hast du <pre> pour récupérer la chaîne meta de la fence
+   (```asm boot.s — l'essentiel  →  meta = « boot.s — l'essentiel »). */
+interface HastCodeNode {
+  children?: { data?: { meta?: string } }[];
+}
+
+function fenceMeta(node: unknown): string | undefined {
+  return (node as HastCodeNode | undefined)?.children?.[0]?.data?.meta;
+}
+
+/**
+ * Bloc de code avec bouton copier — utilisé par Prose pour chaque ``` du
+ * markdown. Si la fence porte un langage connu (asm, rust, c, ld, make),
+ * le bloc gagne un header (meta de la fence + langage) et la coloration
+ * sur la palette --nora-code-* (moodboard-002).
+ */
+function CodeBlock({ node, children, ...rest }: ComponentProps<"pre"> & { node?: unknown }) {
   const ref = useRef<HTMLPreElement>(null);
   const [copied, setCopied] = useState(false);
 
@@ -20,17 +36,41 @@ function CodeBlock(props: ComponentProps<"pre">) {
     setTimeout(() => setCopied(false), 2000);
   }
 
+  // Langage + source bruts depuis l'unique enfant <code class="language-…">
+  let lang: string | undefined;
+  let source: string | undefined;
+  if (isValidElement(children)) {
+    const props = children.props as { className?: string; children?: ReactNode };
+    lang = /language-(\w+)/.exec(props.className ?? "")?.[1];
+    if (typeof props.children === "string") source = props.children;
+  }
+  const codeLang = lang !== undefined && isCodeLang(lang) ? lang : undefined;
+  const highlighted = codeLang !== undefined && source !== undefined;
+  const meta = fenceMeta(node);
+
   return (
-    <div className="group relative my-4">
+    <div className="group relative my-4 overflow-hidden rounded-nora-card border border-nora-line bg-nora-field">
+      {highlighted && (meta || lang) && (
+        <div className="flex items-center justify-between border-b border-nora-line px-3.5 py-2">
+          <span className="font-nora-mono text-xs text-nora-muted">{meta ?? ""}</span>
+          <span className="text-[11px] tracking-wide text-nora-muted uppercase">{lang}</span>
+        </div>
+      )}
       <pre
         ref={ref}
         className={
-          "overflow-x-auto rounded-nora-ctl border border-nora-line bg-nora-field p-4 " +
-          "font-nora-mono text-[13px] leading-relaxed text-nora-ink " +
+          "overflow-x-auto p-4 " +
+          "font-nora-mono text-[13px] leading-relaxed text-nora-code-ink " +
           "[&_code]:bg-transparent [&_code]:p-0"
         }
-        {...props}
-      />
+        {...rest}
+      >
+        {codeLang !== undefined && source !== undefined ? (
+          <code>{highlightCode(source, codeLang)}</code>
+        ) : (
+          children
+        )}
+      </pre>
       <button
         type="button"
         onClick={copy}

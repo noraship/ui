@@ -83,3 +83,32 @@ export type { StatChipProps, StatChipVariant } from "./components/StatChip/StatC
 
 export { Checklist } from "./components/Checklist/Checklist";
 export type { ChecklistProps, ChecklistItem, ChecklistState } from "./components/Checklist/Checklist";
+
+export { Terminal } from "./components/Terminal/Terminal";
+export type { TerminalProps, TerminalLine, TerminalLineKind } from "./components/Terminal/Terminal";
+
+export { StepBadge } from "./components/StepBadge/StepBadge";
+export type { StepBadgeProps } from "./components/StepBadge/StepBadge";
+
+export { HintBox } from "./components/HintBox/HintBox";
+export type { HintBoxProps } from "./components/HintBox/HintBox";
+
+export { LevelAvatar } from "./components/LevelAvatar/LevelAvatar";
+export type { LevelAvatarProps } from "./components/LevelAvatar/LevelAvatar";
+
+export { VideoCard } from "./components/VideoCard/VideoCard";
+export type { VideoCardProps } from "./components/VideoCard/VideoCard";
+
+export { QuizOption } from "./components/QuizOption/QuizOption";
+export type { QuizOptionProps, QuizOptionState } from "./components/QuizOption/QuizOption";
+
+export { ChatPanel, ChatBubble, SuggestionChips } from "./components/ChatPanel/ChatPanel";
+export type {
+  ChatPanelProps,
+  ChatMessage,
+  ChatBubbleProps,
+  SuggestionChipsProps,
+} from "./components/ChatPanel/ChatPanel";
+
+export { highlightCode, isCodeLang } from "./components/Prose/highlight";
+export type { CodeLang } from "./components/Prose/highlight";

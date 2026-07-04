@@ -1,3 +1,5 @@
+import type { ElementType } from "react";
+
 export interface BreadcrumbItem {
   label: string;
   /** Sans href, l'item est la page courante */
@@ -6,9 +8,14 @@ export interface BreadcrumbItem {
 
 export interface BreadcrumbProps {
   items: BreadcrumbItem[];
+  /**
+   * Composant de lien injectable (ex. adaptateur react-router) — reçoit
+   * href/className/children. Par défaut : <a>, plein rechargement.
+   */
+  linkComponent?: ElementType<{ href: string; className?: string }>;
 }
 
-export function Breadcrumb({ items }: BreadcrumbProps) {
+export function Breadcrumb({ items, linkComponent: LinkComp = "a" }: BreadcrumbProps) {
   return (
     <nav aria-label="Fil d'Ariane">
       <ol className="m-0 flex list-none flex-wrap items-center gap-1.5 p-0 text-sm">
@@ -17,7 +24,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
           return (
             <li key={item.label} className="flex items-center gap-1.5">
               {item.href && !isLast ? (
-                <a
+                <LinkComp
                   href={item.href}
                   className={
                     "rounded-nora-sm text-nora-muted hover:text-nora-ink hover:underline " +
@@ -25,7 +32,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
                   }
                 >
                   {item.label}
-                </a>
+                </LinkComp>
               ) : (
                 <span aria-current={isLast ? "page" : undefined} className="font-medium text-nora-ink">
                   {item.label}

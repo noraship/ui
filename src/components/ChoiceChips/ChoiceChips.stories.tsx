@@ -57,3 +57,25 @@ export const AvecPastilles: Story = {
   name: "Avec pastilles de couleur",
   render: () => <CouleursDemo />,
 };
+
+function NiveauxDemo() {
+  const [value, setValue] = useState<string | null>(null);
+  return (
+    <ChoiceChips
+      label="Niveau en assembleur"
+      variant="outline"
+      value={value}
+      onChange={setValue}
+      options={[
+        { value: "debutant", label: "Débutant" },
+        { value: "intermediaire", label: "Intermédiaire" },
+        { value: "avance", label: "Avancé" },
+      ]}
+    />
+  );
+}
+
+export const NiveauxOutline: Story = {
+  name: "Variante outline (évaluation)",
+  render: () => <NiveauxDemo />,
+};

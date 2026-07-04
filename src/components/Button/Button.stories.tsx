@@ -53,3 +53,12 @@ export const ToutesLesVariantes: Story = {
     </div>
   ),
 };
+
+export const CommeLien: Story = {
+  name: "Comme lien (asChild)",
+  render: () => (
+    <Button asChild>
+      <a href="#tarif">Commencer — c'est gratuit</a>
+    </Button>
+  ),
+};

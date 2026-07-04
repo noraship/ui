@@ -1,3 +1,4 @@
+import { Slot } from "radix-ui";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
@@ -8,6 +9,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
   /** Affiche un spinner et désactive le bouton */
   loading?: boolean;
+  /**
+   * Rend l'enfant à la place du <button> en lui passant les styles —
+   * pour les liens (<a>, <Link> de react-router…) sans plein rechargement.
+   */
+  asChild?: boolean;
   children: ReactNode;
 }
 
@@ -35,13 +41,24 @@ export function Button({
   variant = "primary",
   size = "md",
   loading = false,
+  asChild = false,
   disabled,
   children,
   ...rest
 }: ButtonProps) {
+  const className = `${base} ${variants[variant]} ${sizes[size]}`;
+
+  if (asChild) {
+    return (
+      <Slot.Root className={className} {...rest}>
+        {children}
+      </Slot.Root>
+    );
+  }
+
   return (
     <button
-      className={`${base} ${variants[variant]} ${sizes[size]}`}
+      className={className}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
       {...rest}
