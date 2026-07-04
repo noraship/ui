@@ -46,17 +46,3 @@ type Story = StoryObj<typeof meta>;
 export const Lecon: Story = {
   name: "Leçon complète (markdown)",
 };
-
-const leconAvecHtml = `## Entraîne-toi
-
-Le convertisseur ci-dessous montre les trois écritures d'un même nombre —
-c'est une page interactive embarquée via une balise \`<iframe>\` du markdown :
-
-<iframe src="about:blank" height="200" title="Convertisseur binaire / hexa / décimal"></iframe>
-
-Sans \`allowHtml\`, la balise serait affichée comme du texte brut.`;
-
-export const HtmlEmbarque: Story = {
-  name: "HTML embarqué (allowHtml)",
-  args: { markdown: leconAvecHtml, allowHtml: true },
-};

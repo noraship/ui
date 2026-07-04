@@ -2,17 +2,10 @@ import { useRef, useState } from "react";
 import type { ComponentProps } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
 
 export interface ProseProps {
   /** Markdown brut (GFM : tableaux, listes de tâches, etc.) */
   markdown: string;
-  /**
-   * Rend aussi le HTML embarqué dans le markdown (<iframe>, <details>…).
-   * À réserver au contenu de confiance (versionné avec l'app) : le HTML
-   * passe alors sans échappement, comme un dangerouslySetInnerHTML.
-   */
-  allowHtml?: boolean;
 }
 
 /** Bloc de code avec bouton copier — utilisé par Prose pour chaque ``` du markdown. */
@@ -59,12 +52,11 @@ function CodeBlock(props: ComponentProps<"pre">) {
  * chaque nœud est un vrai composant React — stylable directement, sans
  * dangerouslySetInnerHTML ni risque XSS.
  */
-export function Prose({ markdown, allowHtml = false }: ProseProps) {
+export function Prose({ markdown }: ProseProps) {
   return (
     <div className="max-w-[70ch] text-[15px] leading-relaxed text-nora-ink">
       <Markdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={allowHtml ? [rehypeRaw] : []}
         components={{
           h1: (props) => (
             <h1
@@ -109,12 +101,6 @@ export function Prose({ markdown, allowHtml = false }: ProseProps) {
           pre: CodeBlock,
           hr: () => <hr className="my-6 border-nora-line" />,
           img: (props) => <img className="my-4 max-w-full rounded-nora-ctl" {...props} />,
-          iframe: (props) => (
-            <iframe
-              className="my-4 w-full rounded-nora-ctl border border-nora-line"
-              {...props}
-            />
-          ),
           table: (props) => (
             <div className="my-4 overflow-x-auto rounded-nora-ctl border border-nora-line">
               <table className="w-full text-sm" {...props} />
