@@ -63,6 +63,12 @@ export type { BreadcrumbProps, BreadcrumbItem } from "./components/Breadcrumb/Br
 export { ProgressBar } from "./components/Progress/Progress";
 export type { ProgressBarProps } from "./components/Progress/Progress";
 
+export { ProgressRing } from "./components/Progress/ProgressRing";
+export type { ProgressRingProps } from "./components/Progress/ProgressRing";
+
+export { Eyebrow } from "./components/Eyebrow/Eyebrow";
+export type { EyebrowProps } from "./components/Eyebrow/Eyebrow";
+
 export { PrevNext } from "./components/PrevNext/PrevNext";
 export type { PrevNextProps, PrevNextLink } from "./components/PrevNext/PrevNext";
 

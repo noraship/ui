@@ -6,6 +6,10 @@ export interface ProgressBarProps {
   /** Affiche le pourcentage à droite du label */
   showValue?: boolean;
   size?: "sm" | "md";
+  /** Cache la ligne de libellé (le label reste porté par l'aria) */
+  hideLabel?: boolean;
+  /** Remplissage en dégradé accent → accent-text (barre d'XP) */
+  gradient?: boolean;
 }
 
 export function ProgressBar({
@@ -14,14 +18,18 @@ export function ProgressBar({
   label,
   showValue = true,
   size = "md",
+  hideLabel = false,
+  gradient = false,
 }: ProgressBarProps) {
   const percent = Math.round(Math.max(0, Math.min(1, value / max)) * 100);
   return (
     <div className="grid gap-1.5">
-      <div className="flex items-baseline justify-between gap-3 text-sm">
-        <span className="font-medium text-nora-ink">{label}</span>
-        {showValue && <span className="text-nora-muted tabular-nums">{percent} %</span>}
-      </div>
+      {!hideLabel && (
+        <div className="flex items-baseline justify-between gap-3 text-sm">
+          <span className="font-medium text-nora-ink">{label}</span>
+          {showValue && <span className="text-nora-muted tabular-nums">{percent} %</span>}
+        </div>
+      )}
       <div
         role="progressbar"
         aria-label={label}
@@ -34,7 +42,12 @@ export function ProgressBar({
         }
       >
         <div
-          className="h-full rounded-nora-full bg-nora-accent transition-[width] duration-300"
+          className={
+            "h-full rounded-nora-full transition-[width] duration-300 " +
+            (gradient
+              ? "bg-gradient-to-r from-nora-accent to-nora-accent-text"
+              : "bg-nora-accent")
+          }
           style={{ width: `${percent}%` }}
         />
       </div>

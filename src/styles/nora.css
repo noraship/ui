@@ -91,6 +91,7 @@
   --nora-radius-sm: 4px;
   --nora-radius-ctl: 8px;
   --nora-radius-card: 12px;
+  --nora-radius-card-lg: 16px;
   --nora-radius-full: 999px;
 
   /* Élévation */
@@ -196,6 +197,7 @@
   --radius-nora-sm: var(--nora-radius-sm);
   --radius-nora-ctl: var(--nora-radius-ctl);
   --radius-nora-card: var(--nora-radius-card);
+  --radius-nora-card-lg: var(--nora-radius-card-lg);
   --radius-nora-full: var(--nora-radius-full);
   --shadow-nora-1: var(--nora-shadow-1);
   --shadow-nora-2: var(--nora-shadow-2);

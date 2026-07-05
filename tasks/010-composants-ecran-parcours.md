@@ -1,5 +1,5 @@
 ---
-status: todo
+status: done
 depends_on: [009]
 ---
 
@@ -14,18 +14,18 @@ d'autres non. Inventaire pour arbitrage/extraction.
 
 ## À extraire (duplication réelle)
 
-- [ ] **ProgressRing** — l'anneau conique de progression
+- [x] **ProgressRing** — l'anneau conique de progression
       (`conic-gradient(accent pct%, line 0)` + pastille intérieure).
       Existe déjà **deux fois** : dans `LevelAvatar` (34 px) et dans la
       carte niveau du dashboard (88 px, avec numéro + « niveau »).
       API : `size`, `pct`, `thickness`, `children` (contenu du centre) ;
       refactorer `LevelAvatar` dessus.
-- [ ] **ProgressBar : variante gradient** — la barre XP du dashboard
+- [x] **ProgressBar : variante gradient** — la barre XP du dashboard
       réimplémente une barre alors que le DS a déjà `ProgressBar` (aria
       complet). Faute avouée : il fallait l'utiliser. Ajouter une prop
       (`tone="xp"` ou `gradient`) pour le dégradé
       `accent → accent-text`, et brancher le dashboard dessus.
-- [ ] **Eyebrow** — le libellé uppercase accent (12px, tracking .14em)
+- [x] **Eyebrow** — le libellé uppercase accent (12px, tracking .14em)
       revient maintenant partout : dashboard (« Parcours · Créer son
       OS », « Fondations »…), landing (« Pourquoi NoraShip », « Tarif »),
       quiz (« Vérifie ta compréhension »), explorateur atelier. Composant
@@ -33,7 +33,7 @@ d'autres non. Inventaire pour arbitrage/extraction.
 
 ## À décider avec Jean (incohérence de tokens)
 
-- [ ] Les mockups utilisent des **radius 14/16 px** pour les grandes
+- [x] Les mockups utilisent des **radius 14/16 px** pour les grandes
       cartes (hero, niveau, détail module, pricing) alors que le token
       `--nora-radius-card` vaut 12. Aujourd'hui les apps codent `14px`/
       `16px` en dur. Soit on ajoute `--nora-radius-card-lg: 16px`, soit
@@ -53,3 +53,11 @@ d'autres non. Inventaire pour arbitrage/extraction.
 ## Journal
 
 - 2026-07-05 : task créée après revue de l'écran Parcours.
+- 2026-07-05 : livré. `ProgressRing` (pct/size/thickness/children, aria
+  optionnel) + stories ; `LevelAvatar` refactoré dessus. `ProgressBar`
+  gagne `gradient` (accent → accent-text) et `hideLabel` (aria conservé).
+  `Eyebrow` (sm/md, filet optionnel) + stories. Radius : décision par
+  défaut = suivre les mockups → token `--nora-radius-card-lg: 16px` pour
+  les grandes cartes, les 14 px se normalisent sur `--nora-radius-card`
+  (12) — VideoCard corrigé au passage. build-os-teacher rebranché
+  (dashboard, landing, quiz) et radius en dur nettoyés.

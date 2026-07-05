@@ -15,7 +15,7 @@ export interface VideoCardProps {
 export function VideoCard({ title, duration, kicker, onPlay }: VideoCardProps) {
   return (
     <div
-      className="relative flex aspect-video items-center justify-center overflow-hidden rounded-[14px] border border-nora-line"
+      className="relative flex aspect-video items-center justify-center overflow-hidden rounded-nora-card border border-nora-line"
       style={{
         background: "radial-gradient(120% 120% at 30% 20%, #26302c 0%, #161b19 70%)",
       }}
