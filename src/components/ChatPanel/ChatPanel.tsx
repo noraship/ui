@@ -1,5 +1,56 @@
 import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+/* ---------- ChatMarkdown ---------- */
+
+/* Compact markdown renderer for assistant bubbles: the tutor answers in
+   markdown (bold, inline code, lists, occasional fenced snippets). Kept
+   lighter than <Prose> (no code-block chrome / large headings) so it reads
+   as chat. User messages stay plain text (preserves their line breaks). */
+export function ChatMarkdown({ text }: { text: string }) {
+  return (
+    <Markdown
+      remarkPlugins={[remarkGfm]}
+      components={{
+        p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+        ul: ({ children }) => (
+          <ul className="mb-2 list-disc space-y-1 pl-5 last:mb-0">{children}</ul>
+        ),
+        ol: ({ children }) => (
+          <ol className="mb-2 list-decimal space-y-1 pl-5 last:mb-0">{children}</ol>
+        ),
+        li: ({ children }) => <li className="leading-normal">{children}</li>,
+        strong: ({ children }) => (
+          <strong className="font-semibold">{children}</strong>
+        ),
+        a: ({ children, href }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            className="text-nora-accent-text underline"
+          >
+            {children}
+          </a>
+        ),
+        code: ({ children }) => (
+          <code className="rounded bg-nora-field px-1 py-0.5 font-nora-mono text-[0.85em]">
+            {children}
+          </code>
+        ),
+        pre: ({ children }) => (
+          <pre className="mb-2 overflow-x-auto rounded-md bg-nora-field p-2.5 font-nora-mono text-[0.8rem] leading-snug last:mb-0 [&>code]:bg-transparent [&>code]:p-0 [&>code]:text-inherit">
+            {children}
+          </pre>
+        ),
+      }}
+    >
+      {text}
+    </Markdown>
+  );
+}
 
 /* ---------- ChatBubble ---------- */
 
@@ -14,9 +65,11 @@ export function ChatBubble({ role, children }: ChatBubbleProps) {
     <div className={`flex ${user ? "justify-end" : "justify-start"}`}>
       <div
         className={
-          "max-w-[88%] rounded-[14px] px-3.5 py-[11px] text-sm leading-normal whitespace-pre-wrap " +
+          "max-w-[88%] rounded-[14px] px-3.5 py-[11px] text-sm leading-normal " +
+          // Plain user text keeps its line breaks; assistant content is rendered
+          // markdown (block elements), so no pre-wrap there.
           (user
-            ? "rounded-br-[3px] bg-nora-accent text-nora-on-accent"
+            ? "whitespace-pre-wrap rounded-br-[3px] bg-nora-accent text-nora-on-accent"
             : "rounded-bl-[3px] bg-nora-surface-2 text-nora-ink")
         }
       >
@@ -149,7 +202,7 @@ export function ChatPanel({
       >
         {messages.map((m, i) => (
           <ChatBubble key={i} role={m.role}>
-            {m.text}
+            {m.role === "assistant" ? <ChatMarkdown text={m.text} /> : m.text}
           </ChatBubble>
         ))}
         {thinking && (
