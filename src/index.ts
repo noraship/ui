@@ -9,6 +9,11 @@ export type { BadgeProps, BadgeVariant } from "./components/Badge/Badge";
 
 export { Card } from "./components/Card/Card";
 export type { CardProps } from "./components/Card/Card";
+export { CodeEditor } from "./components/CodeEditor/CodeEditor";
+export type {
+  CodeEditorProps,
+  CmDiagnostic,
+} from "./components/CodeEditor/CodeEditor";
 
 export { Avatar } from "./components/Avatar/Avatar";
 export type { AvatarProps, AvatarSize } from "./components/Avatar/Avatar";
