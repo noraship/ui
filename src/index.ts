@@ -34,6 +34,9 @@ export type { TooltipProps } from "./components/Tooltip/Tooltip";
 export { Tabs } from "./components/Tabs/Tabs";
 export type { TabsProps, TabItem } from "./components/Tabs/Tabs";
 
+export { PanelTabs } from "./components/PanelTabs/PanelTabs";
+export type { PanelTabsProps, PanelTabItem } from "./components/PanelTabs/PanelTabs";
+
 export { ToastProvider, useToast } from "./components/Toast/Toast";
 export type { ToastVariant } from "./components/Toast/Toast";
 
@@ -89,6 +92,9 @@ export type { StatChipProps, StatChipVariant } from "./components/StatChip/StatC
 
 export { Checklist } from "./components/Checklist/Checklist";
 export type { ChecklistProps, ChecklistItem, ChecklistState } from "./components/Checklist/Checklist";
+
+export { StepTrail } from "./components/StepTrail/StepTrail";
+export type { StepTrailProps, StepItem, StepState } from "./components/StepTrail/StepTrail";
 
 export { Terminal } from "./components/Terminal/Terminal";
 export type { TerminalProps, TerminalLine, TerminalLineKind } from "./components/Terminal/Terminal";

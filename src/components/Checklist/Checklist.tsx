@@ -20,7 +20,7 @@ const stateLabels: Record<ChecklistState, string> = {
 function StateDot({ state }: { state: ChecklistState }) {
   if (state === "done") {
     return (
-      <span className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-nora-full bg-nora-success-text">
+      <span className="mt-px flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-nora-full bg-nora-success-text">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path
             d="M5 12l5 5L19 7"
@@ -36,7 +36,7 @@ function StateDot({ state }: { state: ChecklistState }) {
   return (
     <span
       className={
-        "h-[18px] w-[18px] shrink-0 rounded-nora-full border-2 " +
+        "mt-px h-[18px] w-[18px] shrink-0 rounded-nora-full border-2 " +
         (state === "current" ? "border-nora-accent-text" : "border-nora-line-strong")
       }
     />
@@ -57,7 +57,7 @@ export function Checklist({ title, items }: ChecklistProps) {
           <li
             key={item.label}
             className={
-              "flex items-center gap-2.5 text-sm " +
+              "flex items-start gap-2.5 text-sm " +
               (item.state === "current"
                 ? "font-semibold text-nora-accent-text"
                 : item.state === "todo"
