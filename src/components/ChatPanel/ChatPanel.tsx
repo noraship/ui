@@ -165,9 +165,12 @@ export function ChatPanel({
 }: ChatPanelProps) {
   const feedRef = useRef<HTMLDivElement>(null);
 
+  // Also follow the last message's text growth, so a streamed reply keeps the
+  // feed pinned to the bottom as tokens arrive (not just on new messages).
+  const lastText = messages[messages.length - 1]?.text ?? "";
   useEffect(() => {
     feedRef.current?.scrollTo({ top: feedRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages.length, thinking]);
+  }, [messages.length, lastText, thinking]);
 
   const canSend = input.trim().length > 0 && !thinking;
 
