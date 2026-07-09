@@ -1,5 +1,5 @@
-import { isValidElement, useRef, useState } from "react";
-import type { ComponentProps, ReactNode } from "react";
+import { Children, isValidElement, useRef, useState } from "react";
+import type { ComponentProps, ReactElement, ReactNode } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { highlightCode, isCodeLang } from "./highlight";
@@ -17,6 +17,135 @@ interface HastCodeNode {
 
 function fenceMeta(node: unknown): string | undefined {
   return (node as HastCodeNode | undefined)?.children?.[0]?.data?.meta;
+}
+
+/* Concatène le texte brut d'un nœud hast (récursif) — sert à repérer l'emoji
+   de tête d'un blockquote pour le promouvoir en callout. */
+interface HastText {
+  type?: string;
+  tagName?: string;
+  value?: string;
+  children?: HastText[];
+}
+function nodeText(node: unknown): string {
+  const n = node as HastText | undefined;
+  if (!n) return "";
+  if (n.type === "text") return n.value ?? "";
+  return (n.children ?? []).map(nodeText).join("");
+}
+
+/* Un blockquote qui commence par un de ces signaux devient un ENCART structuré
+   (« callout ») au lieu de l'aparté grisé/italique. Device pédagogique
+   récurrent : « ⚡ Surprise », « 💡 Astuce », « ⚠️ Piège ». */
+const calloutSignal = /^\s*(⚡|💡|⚠️|📌)/u;
+const signalStrip = /^\s*[⚡💡⚠️📌]\s*/u;
+const takeawaySignal = /^\s*(→|👉)/u;
+
+/* Sortie compilateur mise en scène : en-tête « ● rustc » + `error:` en rouge.
+   Rendu à partir du texte d'une fence de code à l'intérieur d'un callout. */
+function CompilerOutput({ text }: { text: string }) {
+  const lines = text.replace(/\n+$/, "").split("\n");
+  return (
+    <div className="my-4 overflow-hidden rounded-nora-card border border-nora-line bg-nora-field">
+      <div className="flex items-center gap-2 border-b border-nora-line px-3.5 py-2">
+        <span
+          className="h-2 w-2 rounded-full"
+          style={{ background: "var(--nora-danger-text, #e5484d)" }}
+        />
+        <span className="font-nora-mono text-xs text-nora-muted">rustc</span>
+      </div>
+      <pre className="overflow-x-auto p-4 font-nora-mono text-[13px] leading-relaxed text-nora-code-ink">
+        {lines.map((ln, i) => {
+          const m = /^(\s*)(error(?:\[[^\]]*\])?:)(.*)$/.exec(ln);
+          return (
+            <span key={i}>
+              {m ? (
+                <>
+                  {m[1]}
+                  <span style={{ color: "var(--nora-danger-text, #e5484d)" }}>{m[2]}</span>
+                  {m[3]}
+                </>
+              ) : (
+                ln
+              )}
+              {i < lines.length - 1 ? "\n" : ""}
+            </span>
+          );
+        })}
+      </pre>
+    </div>
+  );
+}
+
+/* Encart « Surprise » : bord dégradé accent, eyebrow « ● LABEL », titre en
+   serif, corps, sortie compilateur, puis la reprise fléchée « → ». On lit la
+   structure du blockquote (nœud hast) et on réutilise le rendu inline de
+   react-markdown (`children`) pour le corps et la reprise. */
+function SurpriseCallout({ node, children }: { node?: unknown; children?: ReactNode }) {
+  const els = ((node as HastText | undefined)?.children ?? []).filter(
+    (c) => c.type === "element",
+  );
+  const rendered = Children.toArray(children).filter(isValidElement);
+
+  let label: string | null = null;
+  let title: ReactNode = null;
+  const body: ReactNode[] = [];
+  let takeaway: ReactNode = null;
+
+  els.forEach((el, i) => {
+    const txt = nodeText(el);
+    if (label === null && calloutSignal.test(txt)) {
+      label = txt.replace(signalStrip, "").trim() || "Surprise";
+      return;
+    }
+    if (title === null && /^h[1-6]$/.test(el.tagName ?? "")) {
+      // Reuse the heading's inline content, not the <h4> itself, so its own
+      // (small) heading classes can't win over the serif callout title.
+      const h = rendered[i];
+      title = isValidElement(h)
+        ? (h as ReactElement<{ children?: ReactNode }>).props.children
+        : h;
+      return;
+    }
+    if (el.tagName === "pre") {
+      body.push(<CompilerOutput key={i} text={nodeText(el)} />);
+      return;
+    }
+    if (el.tagName === "p" && takeawaySignal.test(txt)) {
+      takeaway = rendered[i];
+      return;
+    }
+    body.push(rendered[i]);
+  });
+
+  return (
+    <aside className="relative my-5 overflow-hidden rounded-nora-card border border-nora-line bg-nora-surface py-5 pr-6 pl-7 text-[14px]">
+      <span
+        aria-hidden="true"
+        className="absolute inset-y-0 left-0 w-[3px]"
+        style={{
+          background: "linear-gradient(to bottom, var(--nora-accent-text), var(--nora-accent))",
+        }}
+      />
+      {label && (
+        <div className="mb-2 flex items-center gap-2">
+          <span className="h-1.5 w-1.5 rounded-full bg-nora-accent-text" />
+          <span className="text-xs font-semibold tracking-[0.15em] text-nora-accent-text uppercase">
+            {label}
+          </span>
+        </div>
+      )}
+      {title && (
+        <p className="font-nora-display mb-3 text-xl leading-snug font-semibold text-balance text-nora-ink">
+          {title}
+        </p>
+      )}
+      <div className="[&>:first-child]:mt-0 [&>:last-child]:mb-0">{body}</div>
+      {takeaway && (
+        <div className="mt-4 border-t border-nora-line pt-4 [&>p]:my-0">{takeaway}</div>
+      )}
+    </aside>
+  );
 }
 
 /**
@@ -126,12 +255,17 @@ export function Prose({ markdown }: ProseProps) {
           ),
           ul: (props) => <ul className="my-3 grid list-disc gap-1 pl-6" {...props} />,
           ol: (props) => <ol className="my-3 grid list-decimal gap-1 pl-6" {...props} />,
-          blockquote: (props) => (
-            <blockquote
-              className="my-4 border-l-4 border-nora-accent pl-4 text-nora-muted italic"
-              {...props}
-            />
-          ),
+          blockquote: ({ node, children, ...props }) =>
+            calloutSignal.test(nodeText(node)) ? (
+              <SurpriseCallout node={node}>{children}</SurpriseCallout>
+            ) : (
+              <blockquote
+                className="my-4 border-l-4 border-nora-accent pl-4 text-nora-muted italic"
+                {...props}
+              >
+                {children}
+              </blockquote>
+            ),
           code: (props) => (
             <code
               className="rounded-nora-sm bg-nora-field px-1.5 py-0.5 font-nora-mono text-[0.9em]"
