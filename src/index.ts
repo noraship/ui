@@ -42,6 +42,9 @@ export type { TabsProps, TabItem } from "./components/Tabs/Tabs";
 export { PanelTabs } from "./components/PanelTabs/PanelTabs";
 export type { PanelTabsProps, PanelTabItem } from "./components/PanelTabs/PanelTabs";
 
+export { SideNav } from "./components/SideNav/SideNav";
+export type { SideNavProps, SideNavItem } from "./components/SideNav/SideNav";
+
 export { ToastProvider, useToast } from "./components/Toast/Toast";
 export type { ToastVariant } from "./components/Toast/Toast";
 
