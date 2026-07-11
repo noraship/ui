@@ -7,6 +7,10 @@ export interface PanelTabItem {
   label: string;
   /** Icône (svg 20×20 conseillé). */
   icon?: ReactNode;
+  /** Pastille de comptage/état affichée en surimpression sur l'icône. */
+  badge?: ReactNode;
+  /** Couleur de la pastille : « danger » (rouge, défaut) ou « success » (vert). */
+  badgeTone?: "danger" | "success";
   content: ReactNode;
 }
 
@@ -55,13 +59,27 @@ export function PanelTabs({
             key={tab.id}
             value={tab.id}
             className={
-              "flex w-[54px] cursor-pointer flex-col items-center gap-1.5 border-l-2 border-transparent px-1.5 py-2.5 text-[10px] " +
+              "relative flex w-[54px] cursor-pointer flex-col items-center gap-1.5 border-l-2 border-transparent px-1.5 py-2.5 text-[10px] " +
               "text-nora-muted hover:text-nora-ink " +
               "data-[state=active]:border-nora-accent-text data-[state=active]:bg-nora-accent-soft data-[state=active]:text-nora-accent-text " +
               "focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-nora-accent"
             }
           >
-            {tab.icon}
+            <span className="relative">
+              {tab.icon}
+              {tab.badge != null && (
+                <span
+                  className={
+                    "absolute -top-1.5 -right-2 flex h-4 min-w-4 items-center justify-center rounded-nora-full px-1 text-[9px] font-semibold " +
+                    (tab.badgeTone === "success"
+                      ? "bg-nora-success text-nora-on-success"
+                      : "bg-nora-danger text-nora-on-danger")
+                  }
+                >
+                  {tab.badge}
+                </span>
+              )}
+            </span>
             <span>{tab.label}</span>
           </RadixTabs.Trigger>
         ))}

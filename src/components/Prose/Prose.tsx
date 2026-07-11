@@ -88,6 +88,10 @@ function SurpriseCallout({ node, children }: { node?: unknown; children?: ReactN
   const rendered = Children.toArray(children).filter(isValidElement);
 
   let label: string | null = null;
+  // Only the ⚡ Surprise (the long one, with its compiler block) folds away by
+  // default — 💡/⚠️/📌 are short notes and stay open. Keeps the lesson light
+  // while the deep « pourquoi » is one click away.
+  let collapsible = false;
   let title: ReactNode = null;
   const body: ReactNode[] = [];
   let takeaway: ReactNode = null;
@@ -96,6 +100,7 @@ function SurpriseCallout({ node, children }: { node?: unknown; children?: ReactN
     const txt = nodeText(el);
     if (label === null && calloutSignal.test(txt)) {
       label = txt.replace(signalStrip, "").trim() || "Surprise";
+      collapsible = /^\s*⚡/u.test(txt);
       return;
     }
     if (title === null && /^h[1-6]$/.test(el.tagName ?? "")) {
@@ -118,6 +123,62 @@ function SurpriseCallout({ node, children }: { node?: unknown; children?: ReactN
     body.push(rendered[i]);
   });
 
+  const [open, setOpen] = useState(false);
+  const showBody = !collapsible || open;
+  // Collapsed, a ⚡ Surprise must read as a slim clickable strip — small padding,
+  // small inline title next to the eyebrow — not a full card. Expanded, it grows
+  // to the display-serif title + body.
+  const compact = collapsible && !open;
+  const titleBase = "font-nora-display leading-snug font-semibold text-balance text-nora-ink";
+
+  const chevron = (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className={
+        "mt-0.5 shrink-0 text-nora-accent-text transition-transform duration-200 " +
+        (open ? "rotate-180" : "")
+      }
+    >
+      <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+
+  // Compact (collapsed): a single clickable line — « ● SURPRISE  <titre court> ⌄ ».
+  if (compact) {
+    return (
+      <aside className="relative my-4 overflow-hidden rounded-nora-card border border-nora-line bg-nora-surface py-2.5 pr-4 pl-6 text-[14px]">
+        <span
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 w-[3px]"
+          style={{ background: "linear-gradient(to bottom, var(--nora-accent-text), var(--nora-accent))" }}
+        />
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-expanded={false}
+          className="flex w-full cursor-pointer items-center gap-2.5 text-left"
+        >
+          <span className="flex shrink-0 items-center gap-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-nora-accent-text" />
+            {label && (
+              <span className="text-[10px] font-semibold tracking-[0.15em] text-nora-accent-text uppercase">
+                {label}
+              </span>
+            )}
+          </span>
+          <span className={titleBase + " min-w-0 flex-1 truncate text-[14px] font-medium text-nora-muted"}>
+            {title}
+          </span>
+          {chevron}
+        </button>
+      </aside>
+    );
+  }
+
   return (
     <aside className="relative my-5 overflow-hidden rounded-nora-card border border-nora-line bg-nora-surface py-5 pr-6 pl-7 text-[14px]">
       <span
@@ -135,14 +196,27 @@ function SurpriseCallout({ node, children }: { node?: unknown; children?: ReactN
           </span>
         </div>
       )}
-      {title && (
-        <p className="font-nora-display mb-3 text-xl leading-snug font-semibold text-balance text-nora-ink">
-          {title}
-        </p>
-      )}
-      <div className="[&>:first-child]:mt-0 [&>:last-child]:mb-0">{body}</div>
-      {takeaway && (
-        <div className="mt-4 border-t border-nora-line pt-4 [&>p]:my-0">{takeaway}</div>
+      {title &&
+        (collapsible ? (
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            className="mb-3 flex w-full cursor-pointer items-start justify-between gap-3 text-left"
+          >
+            <span className={titleBase + " text-xl"}>{title}</span>
+            {chevron}
+          </button>
+        ) : (
+          <p className={titleBase + " mb-3 text-xl"}>{title}</p>
+        ))}
+      {showBody && (
+        <>
+          <div className="[&>:first-child]:mt-0 [&>:last-child]:mb-0">{body}</div>
+          {takeaway && (
+            <div className="mt-4 border-t border-nora-line pt-4 [&>p]:my-0">{takeaway}</div>
+          )}
+        </>
       )}
     </aside>
   );
