@@ -43,6 +43,11 @@
   --nora-danger-hover: #d05e4c;
   --nora-on-danger: #ffffff;
 
+  /* Success plein (boutons de validation) — vert sauge doux, AA (texte blanc) */
+  --nora-success: #3a7d59;
+  --nora-success-hover: #438a60;
+  --nora-on-success: #ffffff;
+
   /* Syntaxe code (blocs de code, éditeur) — AA sur --nora-field */
   --nora-code-ink: #cdd3cd;
   --nora-code-keyword: #c98bb3;
@@ -136,6 +141,10 @@
   --nora-danger-hover: #9c3328;
   --nora-on-danger: #ffffff;
 
+  --nora-success: #367552;
+  --nora-success-hover: #2e6446;
+  --nora-on-success: #ffffff;
+
   /* Syntaxe code — AA vérifié sur --nora-field et --nora-bg clairs */
   --nora-code-ink: #1e201c;
   --nora-code-keyword: #8d4674;
@@ -177,6 +186,9 @@
   --color-nora-danger: var(--nora-danger);
   --color-nora-danger-hover: var(--nora-danger-hover);
   --color-nora-on-danger: var(--nora-on-danger);
+  --color-nora-success: var(--nora-success);
+  --color-nora-success-hover: var(--nora-success-hover);
+  --color-nora-on-success: var(--nora-on-success);
   --color-nora-code-ink: var(--nora-code-ink);
   --color-nora-code-keyword: var(--nora-code-keyword);
   --color-nora-code-string: var(--nora-code-string);

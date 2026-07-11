@@ -1,7 +1,12 @@
 import { Slot } from "radix-ui";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "ghost"
+  | "danger"
+  | "success";
 export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -29,6 +34,7 @@ const variants: Record<ButtonVariant, string> = {
     "bg-transparent text-nora-ink border border-nora-line-strong hover:border-nora-muted",
   ghost: "bg-transparent text-nora-accent-text hover:underline",
   danger: "bg-nora-danger text-nora-on-danger hover:bg-nora-danger-hover",
+  success: "bg-nora-success text-nora-on-success hover:bg-nora-success-hover",
 };
 
 const sizes: Record<ButtonSize, string> = {
