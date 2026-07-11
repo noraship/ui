@@ -251,12 +251,27 @@ function CodeBlock({ node, children, ...rest }: ComponentProps<"pre"> & { node?:
   const highlighted = codeLang !== undefined && source !== undefined;
   const meta = fenceMeta(node);
 
+  const hasHeader = Boolean(highlighted && (meta || lang));
+
   return (
     <div className="group relative my-4 overflow-hidden rounded-nora-card border border-nora-line bg-nora-field">
-      {highlighted && (meta || lang) && (
-        <div className="flex items-center justify-between border-b border-nora-line px-3.5 py-2">
-          <span className="font-nora-mono text-xs text-nora-muted">{meta ?? ""}</span>
-          <span className="text-[11px] tracking-wide text-nora-muted uppercase">{lang}</span>
+      {hasHeader && (
+        <div className="flex items-center justify-between border-b border-nora-line-strong bg-nora-surface-2 px-3.5 py-1.5">
+          <div className="flex items-center gap-3">
+            <span className="text-[11px] tracking-wide text-nora-muted uppercase">{lang}</span>
+            {meta && <span className="font-nora-mono text-xs text-nora-muted">{meta}</span>}
+          </div>
+          <button
+            type="button"
+            onClick={copy}
+            className={
+              "cursor-pointer rounded-nora-sm px-1.5 py-0.5 text-xs font-semibold " +
+              "text-nora-muted hover:text-nora-ink " +
+              "focus-visible:outline-2 focus-visible:outline-nora-accent"
+            }
+          >
+            {copied ? "Copié ✓" : "Copier"}
+          </button>
         </div>
       )}
       <pre
@@ -274,18 +289,20 @@ function CodeBlock({ node, children, ...rest }: ComponentProps<"pre"> & { node?:
           children
         )}
       </pre>
-      <button
-        type="button"
-        onClick={copy}
-        className={
-          "absolute top-2 right-2 cursor-pointer rounded-nora-sm border border-nora-line " +
-          "bg-nora-surface px-2 py-1 text-xs font-semibold text-nora-muted opacity-0 " +
-          "transition-opacity duration-150 group-hover:opacity-100 hover:text-nora-ink " +
-          "focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-nora-accent"
-        }
-      >
-        {copied ? "Copié ✓" : "Copier"}
-      </button>
+      {!hasHeader && (
+        <button
+          type="button"
+          onClick={copy}
+          className={
+            "absolute top-2 right-2 cursor-pointer rounded-nora-sm border border-nora-line " +
+            "bg-nora-surface px-2 py-1 text-xs font-semibold text-nora-muted opacity-0 " +
+            "transition-opacity duration-150 group-hover:opacity-100 hover:text-nora-ink " +
+            "focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-nora-accent"
+          }
+        >
+          {copied ? "Copié ✓" : "Copier"}
+        </button>
+      )}
     </div>
   );
 }
