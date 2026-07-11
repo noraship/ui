@@ -13,6 +13,11 @@ export interface PanelTabItem {
 export interface PanelTabsProps {
   tabs: PanelTabItem[];
   defaultId?: string;
+  /** Onglet actif contrôlé (avec `onValueChange`). Laisser vide pour un
+   *  fonctionnement non contrôlé piloté par `defaultId`. */
+  value?: string;
+  /** Notifié quand l'onglet actif change (contrôlé ou non). */
+  onValueChange?: (id: string) => void;
   /** Libellé du groupe d'onglets pour les lecteurs d'écran. */
   label: string;
   /** Classes appliquées à la racine (placement/largeur par l'appelant). */
@@ -24,11 +29,21 @@ export interface PanelTabsProps {
  *  remplit le reste, en pleine hauteur. Pensé pour un panneau latéral
  *  (ex. atelier : Leçon + tuteur IA côte à côte de l'éditeur). Pour des
  *  onglets « document » horizontaux, voir `Tabs`. */
-export function PanelTabs({ tabs, defaultId, label, className }: PanelTabsProps) {
+export function PanelTabs({
+  tabs,
+  defaultId,
+  value,
+  onValueChange,
+  label,
+  className,
+}: PanelTabsProps) {
   return (
     <RadixTabs.Root
       orientation="vertical"
-      defaultValue={defaultId ?? tabs[0]?.id}
+      {...(value != null
+        ? { value }
+        : { defaultValue: defaultId ?? tabs[0]?.id })}
+      onValueChange={onValueChange}
       className={"flex h-full min-h-0 " + (className ?? "")}
     >
       <RadixTabs.List
