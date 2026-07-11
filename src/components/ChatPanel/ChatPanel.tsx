@@ -133,6 +133,8 @@ export interface ChatPanelProps {
   onInputChange: (value: string) => void;
   onSend: (text: string) => void;
   placeholder?: string;
+  /** Ligne discrète sous la zone de saisie (ex. suivi de budget) */
+  footerNote?: ReactNode;
 }
 
 const spark = (
@@ -162,6 +164,7 @@ export function ChatPanel({
   onInputChange,
   onSend,
   placeholder = "Écris ton message…",
+  footerNote,
 }: ChatPanelProps) {
   const feedRef = useRef<HTMLDivElement>(null);
 
@@ -277,6 +280,9 @@ export function ChatPanel({
             </svg>
           </button>
         </div>
+        {footerNote && (
+          <div className="mt-2 text-[11px] leading-snug text-nora-muted">{footerNote}</div>
+        )}
       </div>
     </div>
   );
