@@ -49,7 +49,7 @@ export { ToastProvider, useToast } from "./components/Toast/Toast";
 export type { ToastVariant } from "./components/Toast/Toast";
 
 export { Table } from "./components/Table/Table";
-export type { TableProps, TableColumn } from "./components/Table/Table";
+export type { TableProps, TableColumn, TableRow } from "./components/Table/Table";
 
 export { Spinner, Skeleton } from "./components/Loading/Loading";
 export type { SpinnerSize, SkeletonProps } from "./components/Loading/Loading";
